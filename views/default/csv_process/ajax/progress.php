@@ -41,26 +41,32 @@ if (elgg_is_xhr()) {
 	echo $line;
 	return;
 }
+
+$download_link = elgg_view('output/url', array(
+	'text' => elgg_echo('csv_process:log:download'),
+	'href' => 'action/csv_process/log_download?time=' . $vars['time'],
+	'is_action' => true
+));
+
+echo '<div id="csv-process-results">' . $line . '</div>';
+echo elgg_view('output/longtext', array(
+	'value' => elgg_echo('csv_process:log:download:blurb', array($download_link)),
+	'class' => 'elgg-subtext'
+));
 ?>
 
-<div id="csv-process-results">
-<?php echo $line; ?>
-</div>
-<?php echo elgg_view('graphics/ajax_loader'); ?>
 
 <script>
 	function refresh_log() {
 		window.setTimeout(function() {
-			$('.elgg-ajax-loader').show();
 			elgg.get('ajax/view/csv_process/ajax/progress', {
 				data: {
 					time: <?php echo $time; ?>
 				},
 				success: function(result) {
-					$('.elgg-ajax-loader').hide();
 					if (result != elgg.csv_process.results) {
-						$('#csv-process-results').append('<br>' + result);
-						elgg.csv_delete.results = result;
+						$('#csv-process-results').prepend(result+'<br>');
+						elgg.csv_process.results = result;
 					}
 					refresh_log();
 				}
