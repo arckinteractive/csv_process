@@ -5,7 +5,13 @@ $time = $vars['time'];
 
 $line = '';
 
-$f = fopen(elgg_get_config("dataroot") . "csv_process_log/{$time}log.txt", 'r');
+$filename = elgg_get_config("dataroot") . "csv_process_log/{$time}log.txt";
+
+$f = false;
+if (file_exists($filename)) {
+	$f = @fopen($filename, 'r');
+}
+
 if ($f === false) {
 	$line = 'Waiting for log initiation...';
 } else {
@@ -33,12 +39,12 @@ if ($f === false) {
 		fseek($f, $cursor--, SEEK_END);
 		$char = fgetc($f);
 	}
+}
 
-	if (elgg_is_xhr()) {
-		// all we need to supply is the line
-		echo $line;
-		return;
-	}
+if (elgg_is_xhr()) {
+	// all we need to supply is the line
+	echo $line;
+	return;
 }
 
 $download_link = elgg_view('output/url', array(
