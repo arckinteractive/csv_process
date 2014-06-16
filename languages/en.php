@@ -12,7 +12,7 @@ $english = array(
 	'csv_process:file:location' => "CSV Location",
 	'csv_process:file:location:help' => "For files too large to upload, enter the filesystem path to the csv.  Make sure the file has correct permissions and is readable by the webserver.",
 	'csv_process:label:callback' => "CSV Processor",
-	'csv_process:complete' => "CSV Processing is complete.  %s lines were processed.  This full log can be found at %s",
+	'csv_process:complete' => "CSV Processing is complete.  %s lines were processed.",
 	'csv_process:error:uncallable:callback' => "Callback function cannot be found on this system",
 	'csv_process:handler:label' => "Demo CSV Handler",
 	'csv_process:label:delimiter' => "Delimiter",
@@ -25,7 +25,8 @@ $english = array(
 	'csv_process:error:empty:args' => "Delimiter, enclosure, and escape must be defined",
 	'csv_process:nofile' => "File not found",
 	'csv_process:log:download' => "Download Log",
-	'csv_process:log:download:blurb' => "This is a preview of the log for this process.  The last line of the log is retrieved every 2 seconds, so not all lines may show here.  This is intended to show the progress of the script.  The full log can be downloaded here: %s"
+	'csv_process:log:download:blurb' => "This is a preview of the log for this process.  The last line of the log is retrieved every 2 seconds, so not all lines may show here.  This is intended to show the progress of the script.  The full log can be downloaded here: %s",
+	'csv_process:nolog' => "Waiting for log initiation...",
 );
 					
 add_translation("en", $english);

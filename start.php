@@ -30,28 +30,30 @@ function process_csv() {
 	$delimiter = elgg_get_config('csv_process_delimiter');
 	$enclosure = elgg_get_config('csv_process_enclosure');
 	$escape = elgg_get_config('csv_process_escape');
-	
-	$fp = fopen(elgg_get_config("dataroot") . "csv_process_log/{$time}log.txt", "w");
-	error_log($location);
+
 	$lines = 0;
 	if(($handle = fopen($location, 'r')) !== false) {
 			
 		while(($data = fgetcsv($handle, 0, $delimiter, $enclosure, $escape)) !== false) {
 			$lines++;
 
-			$log = $csv_callback($data, $lines);
+			$params = array('data' => $data, 'line' => $lines, 'last' => false, 'time' => $time);
+			$log = $csv_callback($params);
 			
 			if ($log) {
-				fputs($fp, $log . "\n");
+				log($log, $params);
 			}
 		}
 		fclose($handle);
 	}
-
-	$log_location = elgg_get_config("dataroot") . "csv_process_log/{$time}log.txt";
-    fputs($fp, elgg_echo('csv_process:complete', array($lines, $log_location)) . "\n");
-	fclose($fp);
 	
+	// call the callback one last time with the final line count so they can log summary info
+	$log = $csv_callback(array(), $lines, true);
+	if ($log) {
+		log($log, array('time' => $time));
+	}
+
+    log(elgg_echo('csv_process:complete', array($lines)), array('time' => $time));
 }
 
 
@@ -81,7 +83,11 @@ function register_demo_handler($hook, $type, $return, $params) {
  * @param type $data
  * @param type $line
  */
-function demo_handler($data = array(), $line) {
+function demo_handler($params) {
+	if ($params['last']) {
+		return "Log some summary information... after {$params['line']} lines";
+	}
+	
 	// $data is an array of values from the row
 	// $line is the line number we're processing
 	
@@ -93,5 +99,10 @@ function demo_handler($data = array(), $line) {
 	// you can log intervals of lines with a modulus check
 	// eg. if ($line % 100) { return $line . ' lines processed'; } else { return false; }
 	// will log every 100th line
-	return "First Cell: {$data[0]}, Line: {$line}";
+	return "First Cell: {$params['data'][0]}, Line: {$params['line']}";
+}
+
+
+function log($message, $params) {
+	file_put_contents(elgg_get_config("dataroot") . "csv_process_log/{$params['time']}log.txt", $message . "\n", FILE_APPEND);
 }
