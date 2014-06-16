@@ -97,7 +97,7 @@ function demo_handler($params) {
 	// log every line here for demo purposes
 	// for something like a line count it's best for performance not to log every line
 	// you can log intervals of lines with a modulus check
-	// eg. if ($line % 100) { return $line . ' lines processed'; } else { return false; }
+	// eg. if (!($line % 100)) { return $line . ' lines processed'; } else { return false; }
 	// will log every 100th line
 	return "First Cell: {$params['data'][0]}, Line: {$params['line']}";
 }
