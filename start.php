@@ -48,7 +48,7 @@ function process_csv() {
 	}
 	
 	// call the callback one last time with the final line count so they can log summary info
-	$log = $csv_callback(array(), $lines, true);
+	$log = $csv_callback(array('data' => array(), 'time' => $time, 'line' => $lines, 'last' => true));
 	if ($log) {
 		log($log, array('time' => $time));
 	}
