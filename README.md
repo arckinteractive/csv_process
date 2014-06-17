@@ -73,7 +73,7 @@ function myplugin_csv_process($params) {
     // this can be used to log any final tallies or information
     // when the 'last' flag is true data will be an empty array
     if ($params['last']) {
-        return "Log some summary information... after {$params['line']} lines we skipped {$skipped} users";
+        return "{$params['line']} lines processed, {$skipped} skipped users";
     }
 
     // our data is an array in $params['data']
