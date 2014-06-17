@@ -1,5 +1,5 @@
-csv_process
-===========
+#csv_process
+
 
 This is intended for developers who routinely use csvs for functions such as data
 imports.
@@ -11,24 +11,30 @@ file showing how the script performed.
 
 The form for handling csv functions is found at Admin -> Utilities -> CSV Processing
 
-== Installation ==
+##Installation
 
 Install/unzip/clone to the mod directory of your elgg installation
+
 The directory should be named csv_process
+
 Enable the plugin through the admin plugins page
 
-== Dependencies ==
+##Dependencies
 
 This plugin requires the vroom plugin
 [https://github.com/jumbojett/vroom](https://github.com/jumbojett/vroom)
 
 
-== Integration ==
+##Integration
 
 There are only 3 steps required to integrate to this plugin
+
 1. Register a plugin hook handler to declare a callback function
+
 2. Declare your callback function
+
 3. Define your callback function
+
 
 Register your plugin hook handler:
 ```
@@ -67,7 +73,7 @@ function myplugin_csv_process($params) {
     // this can be used to log any final tallies or information
     // when the 'last' flag is true data will be an empty array
     if ($params['last']) {
-	return "Log some summary information... after {$params['line']} lines we skipped {$skipped} users";
+        return "Log some summary information... after {$params['line']} lines we skipped {$skipped} users";
     }
 
     // our data is an array in $params['data']
@@ -85,3 +91,6 @@ function myplugin_csv_process($params) {
     csv_process\log("my log message", $params);
 }
 ```
+
+
+That's all.  Sort our what to do with your data and let this plugin handle the interface.
