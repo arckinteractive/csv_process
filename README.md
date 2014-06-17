@@ -85,12 +85,18 @@ function myplugin_csv_process($params) {
         return; // nothing to do here
     }
 
+    // we have a user from our data, import something
+    $user->food = $params['data'][1];
+
 
     // a returned string from the function will automatically be logged
     // but you can always log extra stuff yourself
     csv_process\log("my log message", $params);
+
+    return 'this will also be logged!';
 }
 ```
 
 
-That's all.  Sort our what to do with your data and let this plugin handle the interface.
+That's all.  Sort out what to do with your data and let this plugin handle the
+interface, logging, row iterations, etc.
