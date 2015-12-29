@@ -1,0 +1,21 @@
+{
+	"name": "arckinteractive/csv_process",
+	"type": "elgg-plugin",
+	"description": "Provides an interface for uploading/processing csvs with custom callbacks for other plugins",
+	"homepage": "http://arckinteractive.com",
+	"keywords": [
+		"elgg", "plugin", "csv", "import"
+	],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Matt Beckett",
+			"email": "matt@arckinteractive.com"
+		}
+	],
+	"require": {
+		"php": ">=5.5",
+		"composer/installers": "~1.0"
+	}
+}
+
