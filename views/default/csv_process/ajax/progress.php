@@ -53,35 +53,16 @@ $download_link = elgg_view('output/url', array(
 	'is_action' => true
 		));
 
-echo '<div id="csv-process-results">' . $line . '</div>';
+echo '<div id="csv-process-results"></div>';
 echo elgg_view('output/longtext', array(
 	'value' => elgg_echo('csv_process:log:download:blurb', array($download_link)),
 	'class' => 'elgg-subtext'
 ));
 ?>
-
-
 <script>
-	function refresh_log() {
-		window.setTimeout(function() {
-			elgg.get('ajax/view/csv_process/ajax/progress', {
-				data: {
-					time: <?php echo $time; ?>
-				},
-				success: function(result) {
-					if (result != elgg.csv_process.results) {
-						$('#csv-process-results').prepend(result + '<br>');
-						elgg.csv_process.results = result;
-					}
-					refresh_log();
-				}
-			});
-		}, 2000);
-	}
-
-	$(document).ready(function() {
-		elgg.provide('elgg.csv_process');
-		elgg.csv_process.results = '<?php echo $line; ?>';
-		refresh_log();
+	require(['csv_process/ajax/progress'], function (Progress) {
+		var p = new Progress(<?= json_encode($time) ?>);
+		p.addLine(<?= json_encode($line) ?>);
+		p.init();
 	});
 </script>

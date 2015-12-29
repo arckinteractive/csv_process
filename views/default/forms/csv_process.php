@@ -1,5 +1,4 @@
 <?php
-
 echo '<br><br>';
 
 // get a list of our callbacks
@@ -78,16 +77,15 @@ echo elgg_view('output/longtext', array(
 ));
 
 echo elgg_view('input/submit', array('value' => elgg_echo('submit')));
-
-
 ?>
 
 <script>
-	$('form.elgg-form-csv-process').submit(function(e) {
-		if (confirm(elgg.echo('csv_process:form:confirm'))) {
-			return true;
-		}
-		
-		return false;
+	require(['elgg', 'jquery'], function (elgg, $) {
+		$('form.elgg-form-csv-process').submit(function () {
+			if (confirm(elgg.echo('csv_process:form:confirm'))) {
+				return true;
+			}
+			return false;
+		});
 	});
 </script>
