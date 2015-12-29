@@ -5,7 +5,8 @@ namespace csv_process;
 elgg_register_event_handler('init', 'system', __NAMESPACE__ . '\\init');
 
 function init() {
-	elgg_extend_view('css/admin', 'css/admin/csv_process');
+	
+	elgg_extend_view('admin.css', 'csv_process.css');
 	
 	elgg_register_admin_menu_item('administer', 'csv_process', 'administer_utilities');
 	
