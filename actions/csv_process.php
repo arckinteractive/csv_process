@@ -48,4 +48,13 @@ if (!file_exists(elgg_get_config('dataroot') . 'csv_process_log')) {
 	mkdir(elgg_get_config('dataroot') . 'csv_process_log'); 
 }
 
+if (elgg_is_xhr()) {
+	echo json_encode(array(
+		'progress' => elgg_view('csv_process/ajax/progress', array(
+			'time' => $time,
+			'full_view' => true,
+		)),
+	));
+}
+
 forward('admin/administer_utilities/csv_process?time=' . $time);

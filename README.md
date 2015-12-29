@@ -1,7 +1,7 @@
 CSV Process for Elgg
 ====================
 
-![Elgg 2.0+](https://img.shields.io/badge/Elgg-2.0+-orange.svg?style=flat-square)
+![Elgg 2.0+](https://img.shields.io/badge/Elgg-<%3D2.0.x-orange.svg?style=flat-square)
 
 This is intended for developers who routinely use csvs for functions such as data
 imports.

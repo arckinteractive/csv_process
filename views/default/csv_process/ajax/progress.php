@@ -41,7 +41,7 @@ if ($f === false) {
 	}
 }
 
-if (elgg_is_xhr()) {
+if (elgg_is_xhr() && !elgg_extract('full_view', $vars, false)) {
 	// all we need to supply is the line
 	echo $line;
 	return;

@@ -80,12 +80,5 @@ echo elgg_view('input/submit', array('value' => elgg_echo('submit')));
 ?>
 
 <script>
-	require(['elgg', 'jquery'], function (elgg, $) {
-		$('form.elgg-form-csv-process').submit(function () {
-			if (confirm(elgg.echo('csv_process:form:confirm'))) {
-				return true;
-			}
-			return false;
-		});
-	});
+	require(['forms/csv_process']);
 </script>
